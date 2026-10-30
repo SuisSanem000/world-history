@@ -1,0 +1,25 @@
+{
+  "name": "tts-feature-module",
+  "version": "1.0.0",
+  "description": "100% Free Bilingual (English & Persian) Neural Text-to-Speech Module",
+  "type": "module",
+  "main": "dist/index.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx tests/test-tts.ts"
+  },
+  "dependencies": {
+    "google-tts-api": "^2.0.2",
+    "node-edge-tts": "^1.2.10"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.5",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
+  }
+}
+

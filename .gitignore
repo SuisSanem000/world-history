@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# TTS intermediate audio files
+temp/
+code/temp/
+
+# OS & Editor files
+.DS_Store
+*.log
+.env
+.env.*
+
