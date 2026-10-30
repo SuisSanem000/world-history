@@ -2,8 +2,8 @@
  * Standalone verification script for the Text-to-Audio (TTS) feature.
  * Tests input validation, language auto-detection, and multi-voice neural synthesis.
  */
-import { validateTextInput } from "../src/validator.js";
-import { synthesizeSpeech } from "../src/tts.js";
+import { validateTextInput } from "../src/tts/validator.js";
+import { synthesizeSpeech } from "../src/tts/tts.js";
 
 async function runTests() {
   console.log("🧪 Running Text-to-Audio validation tests...");

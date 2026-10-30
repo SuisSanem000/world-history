@@ -1,25 +1,37 @@
 {
-  "name": "tts-feature-module",
+  "name": "world-history-visual-map",
   "version": "1.0.0",
-  "description": "100% Free Bilingual (English & Persian) Neural Text-to-Speech Module",
+  "description": "Interactive World History Visual Map App with Bilingual Neural Text-to-Speech",
   "type": "module",
-  "main": "dist/index.js",
   "engines": {
     "node": ">=20.0.0"
   },
   "scripts": {
-    "build": "tsc",
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "test": "tsx tests/test-tts.ts"
+    "test:tts": "tsx tests/test-tts.ts"
   },
   "dependencies": {
+    "d3-geo": "^3.1.1",
     "google-tts-api": "^2.0.2",
-    "node-edge-tts": "^1.2.10"
+    "node-edge-tts": "^1.2.10",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
   },
   "devDependencies": {
+    "@types/d3-geo": "^3.1.0",
     "@types/node": "^22.13.5",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@types/topojson-client": "^3.1.5",
+    "@types/topojson-specification": "^1.0.5",
+    "@vitejs/plugin-react": "^4.3.4",
     "tsx": "^4.19.3",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7"
   }
 }
-

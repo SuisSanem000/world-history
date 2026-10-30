@@ -1,0 +1,235 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #0b1322;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  color: #f8fafc;
+  user-select: none;
+}
+
+.app-shell {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: radial-gradient(circle at 50% 45%, #162642 0%, #09101d 100%);
+}
+
+.world-map-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.world-map-svg {
+  width: 100%;
+  height: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
+  cursor: grab;
+  display: block;
+}
+
+.world-map-svg:active {
+  cursor: grabbing;
+}
+
+/* Ocean & Graticule */
+.map-ocean-sphere {
+  fill: #0f213c;
+  stroke: #2c4a78;
+  stroke-width: 1.4px;
+}
+
+.map-graticule {
+  fill: none;
+  stroke: rgba(148, 163, 184, 0.11);
+  stroke-width: 0.5px;
+  pointer-events: none;
+}
+
+/* Individual Country React SVG Components - Always show country borders */
+.country-shape {
+  fill: #243e63;
+  stroke: #7da2ce;
+  stroke-width: calc(0.65px / var(--map-scale, 1));
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  cursor: pointer;
+  transition: fill 120ms ease, stroke 120ms ease;
+}
+
+.country-shape--hovered {
+  fill: #3b82f6;
+  stroke: #e0f2fe;
+  stroke-width: 1.3px;
+}
+
+.country-shape--selected {
+  fill: #f59e0b;
+  stroke: #fef3c7;
+  stroke-width: 1.5px;
+}
+
+/* Hovered Country Name Inside That Country */
+.country-inside-label {
+  fill: #ffffff;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  paint-order: stroke fill;
+  stroke: #091326;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+}
+
+/* Zoom Controls */
+.map-zoom-controls {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.map-zoom-controls button {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  color: #f8fafc;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 150ms ease, transform 100ms ease;
+}
+
+.map-zoom-controls button.reset-btn {
+  font-size: 11px;
+  height: 32px;
+}
+
+.map-zoom-controls button:hover {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: rgba(148, 163, 184, 0.5);
+}
+
+.map-zoom-controls button:active {
+  transform: scale(0.95);
+}
+
+/* Country Click Popup Modal */
+.popup-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(5, 10, 20, 0.62);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 150ms ease-out;
+}
+
+.popup-card {
+  position: relative;
+  min-width: 300px;
+  max-width: 90vw;
+  padding: 32px 40px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55);
+  text-align: center;
+  animation: popIn 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.popup-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.popup-close-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+.popup-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.14);
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.popup-country-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: #f8fafc;
+  letter-spacing: -0.01em;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
